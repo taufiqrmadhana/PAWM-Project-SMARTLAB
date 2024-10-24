@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Lab - Binary Search Visualization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar" id="navbar">
+            <div class="navbar-header">
+                <img src="../assets/logo_itb_1024.png" alt="Logo ITB">
+                <h1>Programming Lab</h1>
+                <button class="close-btn" onclick="toggleNavbar()">✖</button>
+            </div>
+
+            <ul>
+                <li class="nav-item">
+                    <img src="../assets/svg/home-angle-svgrepo-com.svg" alt="Home" class="nav-icon">
+                    <a href="../index.html">HOME</a>
+                </li>
+                <li class="nav-item active">
+                    <img src="../assets/svg/computer-svgrepo-com.svg" alt="Interactive Lab" class="nav-icon">
+                    <a href="./index.html">INTERACTIVE LAB</a>
+                </li>
+                <li class="nav-item">
+                    <img src="../assets/svg/books-svgrepo-com.svg" alt="Material" class="nav-icon">
+                    <a href="../comingsoon/index.html">MATERI</a>
+                </li>
+                <li class="nav-item">
+                    <img src="../assets/svg/assignment-svgrepo-com.svg" alt="Assignments" class="nav-icon">
+                    <a href="../comingsoon2/index.html">TUGAS</a>
+                </li>
+            </ul>
+        </nav>
+
+        <button class="hamburger-menu" id="hamburger-menu" onclick="toggleNavbar()">☰</button>
+
+        <div class="main-content">
+            <button class="profile-btn" onclick="toggleProfileMenu()">
+                <img src="../assets/svg/profile-circle-svgrepo-com.svg" alt="Profile" class="btn-icon">
+                <span>Jaime Lannister</span>
+            </button>
+
+            <div class="profile-menu" id="profile-menu">
+                <button class="menu-item">Settings</button>
+                <button class="menu-item">Logout</button>
+            </div>
+
+            <div class="content-wrapper">
+                <h1 class="page-title">BINARY SEARCH</h1>
+
+                <section class="material-section">
+                    <div class="container-box">
+                        <h2>Apa itu Binary Search?</h2>
+                        <p>
+                            Binary search adalah algoritma pencarian yang efisien untuk menemukan posisi nilai target dalam array yang sudah diurutkan.
+                            Algoritma ini bekerja dengan membagi interval pencarian menjadi dua bagian pada setiap langkahnya, sehingga kompleksitas waktunya adalah O(log n).
+                        </p>
+                    </div>
+                </section>
+
+                <section class="video-section">
+                    <div class="container-box">
+                        <h2>Video Penjelasan Binary Search</h2>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/MFhxShGxHWc" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard">
+                    <div class="widget">
+                        <h2>Binary Search Visualization</h2>
+                        <div class="search-container">
+                            <input type="text" id="search-input" placeholder="Masukkan angka yang ingin dicari">
+                            <button id="search-btn" onclick="startSearch()">Mulai Pencarian</button>
+                        </div>
+                        <div class="array-container" id="array-container">
+                        </div>
+                        <div class="status" id="status"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
