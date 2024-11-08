@@ -16,27 +16,6 @@
             background-color: #f7f9fc;
             scroll-behavior: smooth;
         }
-        .carousel-image-overlay {
-            position: relative;
-        }
-    
-        .carousel-image-overlay img {
-            opacity: 0.6; /* Darkens the image */
-        }
-    
-        .carousel-caption {
-            z-index: 10; /* Ensures caption appears above the image */
-            color: #ffffff !important; /* Sets text color explicitly to white */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Adds shadow for improved readability */
-        }
-    
-        .carousel-caption h1, .carousel-caption p {
-            z-index: 11; /* Additional z-index to ensure visibility */
-        }
-    
-        .carousel-inner .carousel-item {
-            transition: transform 0.6s ease-in-out; /* Smooth slide animation */
-        }
         .container-main {
             flex: 1;
             padding-top: 70px;
@@ -45,16 +24,7 @@
             height: 80vh;
             background-color: #777;
             position: relative;
-        }
-        #myCarousel .carousel-item::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
-            z-index: 1; /* Ensure overlay is below text */
+            transition: transform 0.5s ease-in-out;
         }
         #myCarousel .carousel-item img {
             object-fit: cover;
@@ -62,16 +32,18 @@
             width: 100%;
             opacity: 0.7;
         }
-        .carousel-caption {
-            position: relative;
-            z-index: 2; /* Ensure text is above overlay */
+        #myCarousel .carousel-caption {
+            position: absolute;
+            bottom: 20%;
+            left: 10%;
+            right: 10%;
+            z-index: 2;
             color: #f8f9fa;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); /* Enhanced text shadow for readability */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
         }
         .navbar {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 0.75rem 1rem;
-            font-size: 1rem;
         }
         .navbar-brand {
             font-weight: 600;
@@ -94,6 +66,13 @@
             border-radius: 25px;
             padding: 5px 15px;
         }
+        .profile-button img {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
         footer {
             background-color: black;
             padding: 20px;
@@ -112,7 +91,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid px-4">
             <a class="navbar-brand" href="#">
-                <img src="./assets/logo_itb_1024.png" alt="ITB Logo" width="30" height="30" class="d-inline-block align-top">
+                <img src="../assets/logo_itb_1024.png" alt="ITB Logo" width="30" height="30" class="d-inline-block align-top">
                 SMART-LAB
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,7 +100,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="./index.html">Home</a>
+                        <a class="nav-link" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./interactive/index.html">Interactive Lab</a>
@@ -130,11 +109,11 @@
                         <a class="nav-link" href="../materials/index.html">Materials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../quiz/index.html">Quiz</a>
+                        <a class="nav-link" href="../comingsoon/index.html">Quiz</a>
                     </li>
                     <li class="nav-item dropdown ms-3">
                         <a class="nav-link dropdown-toggle profile-button" href="#" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Jaime Lannister
+                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="Profile Image"> Jaime Lannister
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenuButton">
                             <li><a class="dropdown-item" href="#">Settings</a></li>
@@ -157,9 +136,7 @@
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <div class="carousel-image-overlay">
-                                <img src="./assets/1.jpg" class="d-block w-100" alt="First slide">
-                            </div>
+                            <img src="./assets/1.jpg" class="d-block w-100" alt="First slide">
                             <div class="carousel-caption text-start">
                                 <h1>Explore Interactive Labs.</h1>
                                 <p>Engage with hands-on labs in mathematics and programming. Visualize functions, run simulations, and learn by doing.</p>
@@ -167,23 +144,19 @@
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="carousel-image-overlay">
-                                <img src="./assets/2.jpg" class="d-block w-100" alt="Second slide">
-                            </div>
+                            <img src="./assets/2.jpg" class="d-block w-100" alt="Second slide">
                             <div class="carousel-caption">
                                 <h1>Comprehensive Learning Materials.</h1>
                                 <p>Access high-quality resources across various topics in mathematics and programming to strengthen your foundations and build advanced skills.</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse Materials</a></p>
+                                <p><a class="btn btn-lg btn-primary" href="./materials/index.html" role="button">Browse Materials</a></p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="carousel-image-overlay">
-                                <img src="./assets/3.jpg" class="d-block w-100" alt="Third slide">
-                            </div>
+                            <img src="./assets/3.jpg" class="d-block w-100" alt="Third slide">
                             <div class="carousel-caption text-end">
                                 <h1>Track and Improve Your Skills.</h1>
                                 <p>Monitor your progress with quizzes, track your strengths, and identify areas for improvement. Make learning measurable and fun!</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Start a Quiz</a></p>
+                                <p><a class="btn btn-lg btn-primary" href="./quiz/index.html" role="button">Start a Quiz</a></p>
                             </div>
                         </div>
                     </div>
@@ -259,7 +232,7 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
     <script>
         function updateClock() {
             const clockElement = document.getElementById('clock');
