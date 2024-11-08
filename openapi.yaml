@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: EduVLab RESTful API
+  version: 1.0.0
+  description: |
+    API untuk platform EduVLab, menyediakan akses ke materi pembelajaran, 
+    laboratorium interaktif, dan kuis sederhana untuk mata kuliah Matematika dan Pemrograman.
+  termsOfService: https://www.example.com/terms
+  contact:
+    name: Support Team
+    url: https://www.example.com/support
+    email: support@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  
+servers:
+  - url: https://api.domain.example
+    description: Production server
+  - url: https://api-dev.domain.example
+    description: Staging server
+security: []
+tags:
+  - name: Authentication
+    description: Operations related to user authentication.
+  - name: Materials
+    description: Operations to access course materials.
+  - name: InteractiveLab
+    description: Operations to access and submit data for interactive labs.
+  - name: Quiz
+    description: Operations to manage and submit quizzes for Math and Programming courses.
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Use a Bearer token for authentication.
+
+paths:
+  /login:
+    post:
+      summary: User login
+      description: Authenticates a user with a username and password.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: Username for authentication.
+                  example: "example_user"
+                password:
+                  type: string
+                  description: Password for authentication.
+                  example: "password123"
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: Successfully authenticated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Access token for the session.
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  expired_at:
+                    type: string
+                    format: date-time
+                    description: Expiration date and time for the access token.
+                    example: "2024-11-08T15:20:00Z"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                    description: Error message indicating failed authentication.
+
+  /materials:
+    get:
+      summary: Get all course materials
+      description: Retrieve a list of all available materials for Math and Programming courses.
+      tags:
+        - Materials
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of available materials.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "material123"
+                    title:
+                      type: string
+                      example: "Introduction to Algebra"
+                    description:
+                      type: string
+                      example: "Basic concepts in algebra for beginners."
+                    course:
+                      type: string
+                      example: "Math"
+        '401':
+          description: Unauthorized, invalid or missing Bearer token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+
+  /interactive-lab:
+    post:
+      summary: Submit interactive lab data
+      description: Submit data and results from an interactive lab session.
+      tags:
+        - InteractiveLab
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lab_id:
+                  type: string
+                  description: Unique identifier for the lab.
+                  example: "lab001"
+                user_data:
+                  type: object
+                  description: Data input by the user during the lab.
+                  example: 
+                    experiment_result: "Successful"
+                    parameters: 
+                      temperature: 25
+                      pressure: 1
+              required:
+                - lab_id
+                - user_data
+      responses:
+        '201':
+          description: Lab data submitted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Lab data submitted successfully."
+                  submission_id:
+                    type: string
+                    example: "subm456"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+
+  /quiz/math:
+    get:
+      summary: Get math quiz questions
+      description: Retrieve questions for the math quiz.
+      tags:
+        - Quiz
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of math quiz questions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    question_id:
+                      type: string
+                      example: "q123"
+                    question:
+                      type: string
+                      example: "What is 2 + 2?"
+                    options:
+                      type: array
+                      items:
+                        type: string
+                      example: ["1", "2", "3", "4"]
+                    answer:
+                      type: string
+                      example: "4"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+
+  /quiz/programming:
+    get:
+      summary: Get programming quiz questions
+      description: Retrieve questions for the programming quiz.
+      tags:
+        - Quiz
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of programming quiz questions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    question_id:
+                      type: string
+                      example: "q200"
+                    question:
+                      type: string
+                      example: "What is the output of print(2 + 3)?"
+                    options:
+                      type: array
+                      items:
+                        type: string
+                      example: ["2", "3", "5", "8"]
+                    answer:
+                      type: string
+                      example: "5"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"

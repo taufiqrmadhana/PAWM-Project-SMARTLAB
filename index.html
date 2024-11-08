@@ -2,104 +2,235 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ITB Interactive Lab: Eksplorasi Algoritma dan Pemrograman</title>
+    <title>ITB Interactive Lab: Explore Algorithms and Programming</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .container-main {
+            flex: 1;
+            padding-top: 70px;
+        }
+        #myCarousel .carousel-item {
+            height: 80vh;
+            background-color: #777;
+        }
+        #myCarousel .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+        .navbar {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #f8f9fa !important;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #adb5bd !important;
+        }
+        .profile-button {
+            font-weight: 600;
+            background-color: #007bff;
+            color: #fff !important;
+            border-radius: 25px;
+            padding: 5px 15px;
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+            width: 100%;
+        }
+        .card-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar" id="navbar">
-            <div class="navbar-header">
-                <img src="./assets/logo_itb_1024.png" alt="Logo ITB">
-                <h1>Programming Lab</h1>
-                <button class="close-btn" onclick="toggleNavbar()">✖</button>
-            </div>
-
-            <ul>
-                <li class="nav-item active">
-                    <img src="./assets/svg/home-angle-svgrepo-com.svg" alt="Home" class="nav-icon">
-                    <a href="./index.html">HOME</a>
-                </li>
-                <li class="nav-item">
-                    <img src="./assets/svg/computer-svgrepo-com.svg" alt="Interactive Lab" class="nav-icon">
-                    <a href="./interactive/index.html">INTERACTIVE LAB</a>
-                </li>
-                <li class="nav-item">
-                    <img src="./assets/svg/books-svgrepo-com.svg" alt="Material" class="nav-icon">
-                    <a href="../comingsoon/index.html">MATERI</a>
-                </li>
-                <li class="nav-item">
-                    <img src="./assets/svg/assignment-svgrepo-com.svg" alt="Assignments" class="nav-icon">
-                    <a href="../comingsoon2/index.html">TUGAS</a>
-                </li>
-            </ul>
-        </nav>
-
-        <button class="hamburger-menu" id="hamburger-menu" onclick="toggleNavbar()">☰</button>
-
-        <div class="main-content">
-            <button class="profile-btn" onclick="toggleProfileMenu()">
-                <img src="./assets/svg/profile-circle-svgrepo-com.svg" alt="Profile" class="btn-icon">
-                <span>Jaime Lannister</span>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#">
+                <img src="./assets/logo_itb_1024.png" alt="ITB Logo" width="30" height="30" class="d-inline-block align-top">
+                Programming Lab
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="profile-menu" id="profile-menu">
-                <button class="menu-item">Settings</button>
-                <button class="menu-item">Logout</button>
-            </div>
-
-            <div class="content-wrapper">
-                <section class="hero-section">
-                    <div class="hero-content">
-                        <h1>ITB Interactive Lab</h1>
-                        <p>Eksplorasi Algoritma dan Pemrograman</p>
-                        <a href="./interactive/index.html" class="cta-button">Mulai Belajar</a>
-                    </div>
-                    <div class="hero-image">
-                        <img src="./assets/image-9.webp" alt="Coding Image">
-                    </div>
-                </section>
-
-                <section class="widgets-section">
-                    <div class="widget clock-widget">
-                        <h3>Current Time</h3>
-                        <div id="clock"></div>
-                    </div>
-                    <div class="widget login-history-widget">
-                        <h3>Login History</h3>
-                        <ul>
-                            <li>Last login: 23 October 2024</li>
-                            <li>Previous login: 22 October 2024</li>
-                            <li>Previous login: 21 October 2024</li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./interactive/index.html">Interactive Lab</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../comingsoon/index.html">Materials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../comingsoon/index.html">Assignments</a>
+                    </li>
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle profile-button" href="#" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Jaime Lannister
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenuButton">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
                         </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid container-main">
+        <div class="row">
+            <div class="col-lg-8 p-0">
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
                     </div>
-                    <div class="widget grade-widget">
-                        <h3>Average Grade</h3>
-                        <p class="grade-value">85</p>
-                    </div>
-                    <div class="widget task-widget">
-                        <h3>Pending Tasks</h3>
-                        <div class="task-list">
-                            <div class="task">
-                                <span class="task-name">Data Structures</span>
-                                <span class="task-deadline">(Due: 25 Oct)</span>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" class="d-block w-100" alt="First slide">
+                            <div class="container">
+                                <div class="carousel-caption text-start">
+                                    <h1>Example headline.</h1>
+                                    <p>Experience exciting content in programming and algorithms.</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                                </div>
                             </div>
-                            <div class="task">
-                                <span class="task-name">Algorithms</span>
-                                <span class="task-deadline">(Due: 26 Oct)</span>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" class="d-block w-100" alt="Second slide">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h1>Another example headline.</h1>
+                                    <p>Dive deep into interactive labs for hands-on learning.</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                                </div>
                             </div>
-                            <div class="task">
-                                <span class="task-name">Advanced Programming</span>
-                                <span class="task-deadline">(Due: 27 Oct)</span>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" class="d-block w-100" alt="Third slide">
+                            <div class="container">
+                                <div class="carousel-caption text-end">
+                                    <h1>One more for good measure.</h1>
+                                    <p>Explore more with us and enhance your skills.</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Current Time</h5>
+                                <p id="clock" class="display-4"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Login History</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Last login: 23 October 2024</li>
+                                    <li class="list-group-item">Previous login: 22 October 2024</li>
+                                    <li class="list-group-item">Previous login: 21 October 2024</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Average Grade</h5>
+                                <p class="display-4 text-success">85</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Pending Tasks</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Data Structures
+                                        <span class="badge bg-primary rounded-pill">Due: 25 Oct</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Algorithms
+                                        <span class="badge bg-primary rounded-pill">Due: 26 Oct</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Advanced Programming
+                                        <span class="badge bg-primary rounded-pill">Due: 27 Oct</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2024 ITB Interactive Lab. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 </body>
 </html>

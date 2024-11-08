@@ -4,62 +4,115 @@
     <meta charset="UTF-8">
     <title>Coming Soon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .container-main {
+            flex: 1;
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+        .navbar {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #f8f9fa !important;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #adb5bd !important;
+        }
+        .profile-button {
+            font-weight: 600;
+            background-color: #007bff;
+            color: #fff !important;
+            border-radius: 25px;
+            padding: 5px 15px;
+        }
+        .coming-soon-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .coming-soon-content {
+            text-align: center;
+        }
+        .coming-soon-content h1 {
+            font-size: 2.5rem;
+            color: #333;
+        }
+        .coming-soon-content p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar" id="navbar">
-            <div class="navbar-header">
-                <img src="../assets/logo_itb_1024.png" alt="Logo ITB">
-                <h1>Programming Lab</h1>
-                <button class="close-btn" onclick="toggleNavbar()">✖</button>
-            </div>
-
-            <ul>
-                <li class="nav-item">
-                    <img src="../assets/svg/home-angle-svgrepo-com.svg" alt="Home" class="nav-icon">
-                    <a href="../index.html">HOME</a>
-                </li>
-                <li class="nav-item">
-                    <img src="../assets/svg/computer-svgrepo-com.svg" alt="Interactive Lab" class="nav-icon">
-                    <a href="../interactive/index.html">INTERACTIVE LAB</a>
-                </li>
-                <li class="nav-item active">
-                    <img src="../assets/svg/books-svgrepo-com.svg" alt="Material" class="nav-icon">
-                    <a href="../comingsoon/index.html">MATERI</a>
-                </li>
-                <li class="nav-item">
-                    <img src="../assets/svg/assignment-svgrepo-com.svg" alt="Assignments" class="nav-icon">
-                    <a href="../comingsoon2/index.html">TUGAS</a>
-                </li>
-            </ul>
-        </nav>
-
-        <button class="hamburger-menu" id="hamburger-menu" onclick="toggleNavbar()">☰</button>
-
-        <div class="main-content">
-            <button class="profile-btn" onclick="toggleProfileMenu()">
-                <img src="../assets/svg/profile-circle-svgrepo-com.svg" alt="Profile" class="btn-icon">
-                <span>Jaime Lannister</span>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/logo_itb_1024.png" alt="ITB Logo" width="30" height="30" class="d-inline-block align-top">
+                Programming Lab
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="profile-menu" id="profile-menu">
-                <button class="menu-item">Settings</button>
-                <button class="menu-item">Logout</button>
-            </div>
-
-            <div class="content-wrapper">
-                <section class="coming-soon-section">
-                    <div class="coming-soon-content">
-                        <h1>Coming Soon</h1>
-                        <p>Halaman ini sedang dalam pengembangan. Nantikan update selanjutnya!</p>
-                    </div>
-                </section>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../interactive/index.html">Interactive Lab</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../comingsoon/index.html">Materials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../comingsoon/index.html">Assignments</a>
+                    </li>
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle profile-button" href="#" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Jaime Lannister
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenuButton">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+
+    <div class="container-main d-flex justify-content-center align-items-center">
+        <section class="coming-soon-section">
+            <div class="coming-soon-content">
+                <h1>Coming Soon</h1>
+                <p>This page is under development. Stay tuned for updates!</p>
+            </div>
+        </section>
     </div>
 
-    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

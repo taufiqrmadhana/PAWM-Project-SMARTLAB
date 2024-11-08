@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - ITB Interactive Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .container {
+            max-width: 900px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .cascading-right {
+            margin-right: -50px;
+        }
+        @media (max-width: 991.98px) {
+            .cascading-right {
+                margin-right: 0;
+            }
+        }
+        .card {
+            backdrop-filter: blur(30px);
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        /* Title styling with underline */
+        .fw-bold {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .fw-bold::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #007bff;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .form-outline input {
+                font-size: 1rem;
+                padding: 12px;
+            }
+            .profile-button {
+                padding: 5px 15px;
+                font-size: 1rem;
+            }
+        }
+        /* Center the form and reduce width for mobile */
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+            .card-body {
+                padding: 15px;
+            }
+            .profile-button {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            .signup-image {
+                display: none; /* Hide image on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="text-center text-lg-start">
+        <div class="container">
+            <div class="row g-0 align-items-center">
+                <!-- Sign-Up Form -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card cascading-right bg-body-tertiary shadow-lg">
+                        <div class="card-body p-5 text-center">
+                            <h2 class="fw-bold">Sign up now</h2>
+                            <form>
+                                <!-- First and Last Name -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="firstName" class="form-control" placeholder="First name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="lastName" class="form-control" placeholder="Last name" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="signupEmail" class="form-control" placeholder="Email address" />
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="signupPassword" class="form-control" placeholder="Password" />
+                                </div>
+
+                                <!-- Newsletter Checkbox -->
+                                <div class="form-check d-flex justify-content-center mb-4">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="newsletter" checked />
+                                    <label class="form-check-label" for="newsletter">
+                                        Subscribe to our newsletter
+                                    </label>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4 profile-button">
+                                    Sign up
+                                </button>
+
+                                <!-- Login Button -->
+                                <p>Already have an account? <a href="../login/index.html" class="btn btn-link profile-button text-decoration-none">Log in</a></p>
+
+                                <!-- Social sign-up buttons -->
+                                <div class="text-center">
+                                    <p>or sign up with:</p>
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-google"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-twitter"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-link btn-floating mx-1">
+                                        <i class="fab fa-github"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Section -->
+                <div class="col-lg-6 mb-5 mb-lg-0 signup-image">
+                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4" alt="" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
