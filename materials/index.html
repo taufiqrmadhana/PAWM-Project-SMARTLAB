@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Materials - ITB SMART-LAB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7f9fc;
+            overflow-x: hidden;
+        }
+        .container-main {
+            flex: 1;
+            padding-top: 70px;
+        }
+        .navbar {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1rem;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #f8f9fa !important;
+        }
+        footer {
+            background-color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+            width: 100%;
+        }
+        .section-heading {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .card-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        .card-text {
+            font-size: 0.95rem;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        .profile-button {
+            font-weight: 600;
+            background-color: #007bff;
+            color: #fff !important;
+            border-radius: 25px;
+            padding: 5px 15px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #adb5bd !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/logo_itb_1024.png" alt="ITB Logo" width="30" height="30" class="d-inline-block align-top">
+                SMART-LAB
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../interactive/index.html">Interactive Lab</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./index.html">Materials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../quiz/index.html">Quiz</a>
+                    </li>
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle profile-button" href="#" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Jaime Lannister
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenuButton">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid container-main">
+        <!-- Mathematics Section -->
+        <h2 class="section-heading">Mathematics Topics</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Sets and Operations</h5>
+                        <p class="card-text">Explore fundamental operations on sets, including unions, intersections, and complements.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/xZELQc11ACY" title="Sets and Operations" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Graphs and Functions</h5>
+                        <p class="card-text">Understand graphing principles, function behavior, and transformations.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/kvU9sOzT2mk" title="Graphs and Functions" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Probability Basics</h5>
+                        <p class="card-text">Introduction to probability concepts and calculations for random events.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/SkidyDQuupA" title="Probability Basics" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Algebra Basics</h5>
+                        <p class="card-text">Get a solid foundation in algebra with techniques for solving equations and inequalities.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/Z-ZkmpQBIFo" title="Algebra Basics" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Calculus Essentials</h5>
+                        <p class="card-text">Introduction to calculus, covering limits, derivatives, and basic integrals.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/WsQQvHm4lSw" title="Calculus Essentials" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Geometry Essentials</h5>
+                        <p class="card-text">Learn about shapes, angles, and basic theorems in geometry.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/302eJ3TzJQU" title="Geometry Essentials" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Programming Section -->
+        <h2 class="section-heading mt-5">Programming Topics</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Binary Search</h5>
+                        <p class="card-text">Understand the binary search algorithm for efficient data searching.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/MFhxShGxHWc" title="Binary Search" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Sorting Algorithms</h5>
+                        <p class="card-text">Learn common sorting algorithms, including bubble sort and quicksort.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/rbbTd-gkajw" title="Sorting Algorithms" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Structures</h5>
+                        <p class="card-text">Introduction to data structures such as arrays, stacks, and queues.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/SFEROgwxicA" title="Data Structures" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Functions in Python</h5>
+                        <p class="card-text">Learn how to create and use functions effectively in Python.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/89cGQjB5R4M" title="Functions in Python" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Error Handling</h5>
+                        <p class="card-text">Master error handling techniques to write reliable code.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/j_q6NGOwDJo" title="Error Handling" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Loops and Control Statements</h5>
+                        <p class="card-text">Explore loops and conditionals to control the flow of your programs.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Loops and Control Statements" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ITB SMART-LAB. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

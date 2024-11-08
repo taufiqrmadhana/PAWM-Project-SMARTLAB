@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Interactive Lab - ITB SMART-LAB</title>
+    <title>Quiz Home - ITB SMART-LAB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -14,11 +14,10 @@
             flex-direction: column;
             font-family: 'Montserrat', sans-serif;
             background-color: #f7f9fc;
-            overflow-x: hidden;
         }
         .container-main {
             flex: 1;
-            padding-top: 100px;
+            padding-top: 100px; /* Added padding for title */
             padding-bottom: 50px;
         }
         .navbar {
@@ -44,20 +43,20 @@
             color: #6c757d;
             width: 100%;
         }
-        .lab-cards {
+        .quiz-cards {
             display: flex;
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
         }
-        .lab-option-card {
-            width: 350px;
+        .quiz-option-card {
+            width: 350px; /* Larger card width */
             margin: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
             overflow: hidden;
         }
-        .lab-option-card img {
+        .quiz-option-card img {
             width: 100%;
             height: 180px;
             object-fit: cover;
@@ -120,27 +119,27 @@
     </nav>
 
     <div class="container container-main text-center">
-        <h2>Welcome to the Interactive Lab</h2>
-        <p class="mb-4">Engage with interactive visualizations to deepen your understanding of mathematical functions and programming algorithms. Choose a lab to explore!</p>
+        <h2>Welcome to the Quiz Section</h2>
+        <p class="mb-4">Challenge your knowledge with quizzes on Mathematics and Programming topics. Choose a quiz to get started!</p>
 
-        <div class="lab-cards">
-            <!-- Math Visualization Card -->
-            <div class="lab-option-card card">
-                <img src="../assets/pexels-ian-panelo-3729557.jpg" alt="Math Visualization">
+        <div class="quiz-cards">
+            <!-- Mathematics Quiz Card -->
+            <div class="quiz-option-card card">
+                <img src="../assets/pexels-ian-panelo-3729557.jpg" alt="Math Quiz">
                 <div class="card-body">
-                    <h5 class="card-title">Math Visualization</h5>
-                    <p class="card-text">Explore interactive visualizations of mathematical functions. Understand graph behaviors, transformations, and more.</p>
-                    <a href="./math-visualization.html" class="btn btn-primary w-100 mt-3">Explore Math Lab</a>
+                    <h5 class="card-title">Mathematics Quiz</h5>
+                    <p class="card-text">Put your mathematical skills to the test with questions on various topics, from algebra to probability.</p>
+                    <a href="./math-quiz.html" class="btn btn-primary w-100 mt-3">Start Math Quiz</a>
                 </div>
             </div>
 
-            <!-- Programming Visualization Card -->
-            <div class="lab-option-card card">
-                <img src="../assets/pexels-luis-gomes-166706-546819.jpg" alt="Programming Visualization">
+            <!-- Programming Quiz Card -->
+            <div class="quiz-option-card card">
+                <img src="../assets/pexels-luis-gomes-166706-546819.jpg" alt="Programming Quiz">
                 <div class="card-body">
-                    <h5 class="card-title">Programming Visualization</h5>
-                    <p class="card-text">Visualize the binary search algorithm and see how data is sorted and searched efficiently.</p>
-                    <a href="./programming-lab.html" class="btn btn-primary w-100 mt-3">Explore Programming Lab</a>
+                    <h5 class="card-title">Programming Quiz</h5>
+                    <p class="card-text">Evaluate your coding knowledge on data structures, algorithms, and other programming concepts.</p>
+                    <a href="./programming-quiz.html" class="btn btn-primary w-100 mt-3">Start Programming Quiz</a>
                 </div>
             </div>
         </div>

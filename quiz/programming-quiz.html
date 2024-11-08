@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Interactive Lab - ITB SMART-LAB</title>
+    <title>Programming Quiz - ITB SMART-LAB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -14,12 +14,10 @@
             flex-direction: column;
             font-family: 'Montserrat', sans-serif;
             background-color: #f7f9fc;
-            overflow-x: hidden;
         }
         .container-main {
             flex: 1;
-            padding-top: 100px;
-            padding-bottom: 50px;
+            padding-top: 70px;
         }
         .navbar {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -44,40 +42,22 @@
             color: #6c757d;
             width: 100%;
         }
-        .lab-cards {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .lab-option-card {
-            width: 350px;
-            margin: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .lab-option-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .card-body {
-            padding: 20px;
-        }
         .card-title {
-            font-size: 1.5rem;
             font-weight: bold;
         }
-        .profile-button {
-            font-weight: 600;
-            background-color: #007bff;
-            color: #fff !important;
-            border-radius: 25px;
-            padding: 5px 15px;
+        .quiz-container {
+            max-width: 800px;
+            margin: auto;
+            padding-top: 20px;
         }
-        .navbar-nav .nav-link:hover {
-            color: #adb5bd !important;
+        .confirmation-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border: 1px solid #cfe2ff;
+            border-radius: 8px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -97,13 +77,13 @@
                         <a class="nav-link" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="../interactive/index.html">Interactive Lab</a>
+                        <a class="nav-link" href="./quiz-home.html">Quiz Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../materials/index.html">Materials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../quiz/index.html">Quiz</a>
+                        <a class="nav-link" href="../comingsoon/index.html">Assignments</a>
                     </li>
                     <li class="nav-item dropdown ms-3">
                         <a class="nav-link dropdown-toggle profile-button" href="#" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -119,30 +99,25 @@
         </div>
     </nav>
 
-    <div class="container container-main text-center">
-        <h2>Welcome to the Interactive Lab</h2>
-        <p class="mb-4">Engage with interactive visualizations to deepen your understanding of mathematical functions and programming algorithms. Choose a lab to explore!</p>
+    <div class="container quiz-container">
+        <h2 class="text-center">Programming Quiz</h2>
+        <div id="quiz-questions">
+            <!-- Programming questions here, similar to Math Quiz -->
+        </div>
 
-        <div class="lab-cards">
-            <!-- Math Visualization Card -->
-            <div class="lab-option-card card">
-                <img src="../assets/pexels-ian-panelo-3729557.jpg" alt="Math Visualization">
-                <div class="card-body">
-                    <h5 class="card-title">Math Visualization</h5>
-                    <p class="card-text">Explore interactive visualizations of mathematical functions. Understand graph behaviors, transformations, and more.</p>
-                    <a href="./math-visualization.html" class="btn btn-primary w-100 mt-3">Explore Math Lab</a>
-                </div>
-            </div>
+        <!-- Navigation and Submit Buttons -->
+        <div class="quiz-nav text-center">
+            <button class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
+            <button class="btn btn-primary" onclick="nextQuestion()">Next</button>
+        </div>
+        <div class="submit-btn text-center" style="margin-top: 20px;">
+            <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
 
-            <!-- Programming Visualization Card -->
-            <div class="lab-option-card card">
-                <img src="../assets/pexels-luis-gomes-166706-546819.jpg" alt="Programming Visualization">
-                <div class="card-body">
-                    <h5 class="card-title">Programming Visualization</h5>
-                    <p class="card-text">Visualize the binary search algorithm and see how data is sorted and searched efficiently.</p>
-                    <a href="./programming-lab.html" class="btn btn-primary w-100 mt-3">Explore Programming Lab</a>
-                </div>
-            </div>
+        <!-- Confirmation Message -->
+        <div id="confirmation-message" class="confirmation-message">
+            <h5>Quiz Submitted!</h5>
+            <p>Thank you for completing the Programming Quiz. Your answers have been recorded.</p>
         </div>
     </div>
 
@@ -152,5 +127,41 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentQuestion = 0;
+        const questions = document.querySelectorAll('.question-card');
+        const submitButton = document.querySelector('.submit-btn');
+        const confirmationMessage = document.getElementById('confirmation-message');
+
+        function showQuestion(index) {
+            questions.forEach((question, i) => {
+                question.style.display = i === index ? 'block' : 'none';
+            });
+            submitButton.style.display = index === questions.length - 1 ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function submitQuiz() {
+            confirmationMessage.style.display = 'block';
+            document.getElementById('quiz-questions').style.display = 'none';
+            document.querySelector('.quiz-nav').style.display = 'none';
+            submitButton.style.display = 'none';
+        }
+
+        showQuestion(currentQuestion);
+    </script>
 </body>
 </html>
