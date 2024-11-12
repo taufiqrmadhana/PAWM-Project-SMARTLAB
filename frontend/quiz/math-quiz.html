@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Quiz - ITB SMART-LAB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .container-main {
+            flex: 1;
+            padding-top: 70px;
+        }
+        .navbar {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1rem;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #f8f9fa !important;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #adb5bd !important;
+        }
+        .profile-button {
+            font-weight: 600;
+            background-color: #007bff;
+            color: #fff !important;
+            border-radius: 25px;
+            padding: 5px 15px;
+        }
+        footer {
+            background-color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+            width: 100%;
+        }
+        .card-title {
+            font-weight: bold;
+        }
+        .quiz-container {
+            max-width: 800px;
+            margin: auto;
+            padding-top: 20px;
+        }
+        .confirmation-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border: 1px solid #cfe2ff;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .profile-button img {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../assets/logo_itb_1024.png" alt="ITB Logo" width="30" height="30" class="d-inline-block align-top">
+                SMART-LAB
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../interactive/index.html">Interactive Lab</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../materials/index.html">Materials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../quiz/index.html">Quiz</a>
+                    </li>
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle profile-button" href="#" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="Profile Image"> Paul Pogba
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenuButton">
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container quiz-container">
+        <h2 class="text-center">Math Quiz</h2>
+        <div id="quiz-questions">
+
+            <!-- Question 1 -->
+            <div class="card question-card">
+                <div class="card-body">
+                    <h5 class="card-title">1. What is the union of two sets?</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question1" id="q1a" value="a">
+                        <label class="form-check-label" for="q1a">All elements common in both sets</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question1" id="q1b" value="b">
+                        <label class="form-check-label" for="q1b">All distinct elements from both sets</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question1" id="q1c" value="c">
+                        <label class="form-check-label" for="q1c">Only unique elements from each set</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question1" id="q1d" value="d">
+                        <label class="form-check-label" for="q1d">Only common elements in each set</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question1" id="q1e" value="e">
+                        <label class="form-check-label" for="q1e">None of the above</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add additional questions here up to 10 questions -->
+
+        </div>
+
+        <!-- Navigation and Submit Buttons -->
+        <div class="quiz-nav text-center">
+            <button class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
+            <button class="btn btn-primary" onclick="nextQuestion()">Next</button>
+        </div>
+        <div class="submit-btn text-center" style="margin-top: 20px;">
+            <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+
+        <!-- Confirmation Message -->
+        <div id="confirmation-message" class="confirmation-message">
+            <h5>Quiz Submitted!</h5>
+            <p>Thank you for completing the Math Quiz. Your answers have been recorded.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ITB SMART-LAB. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentQuestion = 0;
+        const questions = document.querySelectorAll('.question-card');
+        const submitButton = document.querySelector('.submit-btn');
+        const confirmationMessage = document.getElementById('confirmation-message');
+
+        function showQuestion(index) {
+            questions.forEach((question, i) => {
+                question.style.display = i === index ? 'block' : 'none';
+            });
+            submitButton.style.display = index === questions.length - 1 ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function submitQuiz() {
+            confirmationMessage.style.display = 'block';
+            document.getElementById('quiz-questions').style.display = 'none';
+            document.querySelector('.quiz-nav').style.display = 'none';
+            submitButton.style.display = 'none';
+        }
+
+        showQuestion(currentQuestion);
+    </script>
+</body>
+</html>
