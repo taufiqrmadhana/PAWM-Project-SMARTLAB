@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up - ITB Interactive Lab</title>
+    <title>Sign Up - ITB SMART LAB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+
     <style>
         body, html {
             height: 100%;
@@ -16,163 +18,138 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #f7f9fc;
         }
-        .container {
-            max-width: 900px;
-            padding-top: 20px;
-            padding-bottom: 20px;
+        .container-fluid {
+            max-width: 1000px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            overflow: hidden;
         }
-        .cascading-right {
-            margin-right: -50px;
+        .form-section {
+            padding: 60px 50px;
+            background-color: #ffffff;
+            border-radius: 15px 0 0 15px;
         }
-        @media (max-width: 991.98px) {
-            .cascading-right {
-                margin-right: 0;
-            }
+        .form-section h2 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
         }
-        .card {
-            backdrop-filter: blur(30px);
-            padding: 20px;
+        .form-outline input {
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: 1px solid #ddd;
         }
         .btn-primary {
             background-color: #007bff;
             border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 0;
+            border-radius: 8px;
+            width: 100%;
+            transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
             background-color: #0056b3;
         }
-        /* Title styling with underline */
-        .fw-bold {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
-        .fw-bold::after {
-            content: "";
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background-color: #007bff;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
+        .link-section {
+            margin-top: 20px;
+            font-size: 0.95rem;
         }
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .card-body {
-                padding: 20px;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-            .form-outline input {
-                font-size: 1rem;
-                padding: 12px;
-            }
-            .profile-button {
-                padding: 5px 15px;
-                font-size: 1rem;
-            }
+        .link-section a {
+            color: #007bff;
+            font-weight: 600;
+            text-decoration: none;
         }
-        /* Center the form and reduce width for mobile */
-        @media (max-width: 576px) {
-            .container {
-                padding: 10px;
-            }
-            .card-body {
-                padding: 15px;
-            }
-            .profile-button {
-                padding: 8px 20px;
-                font-size: 0.9rem;
-            }
-            .signup-image {
-                display: none; /* Hide image on small screens */
-            }
+        .link-section a:hover {
+            text-decoration: underline;
+        }
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 0 15px 15px 0;
         }
     </style>
 </head>
 <body>
-    <section class="text-center text-lg-start">
-        <div class="container">
-            <div class="row g-0 align-items-center">
-                <!-- Sign-Up Form -->
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="card cascading-right bg-body-tertiary shadow-lg">
-                        <div class="card-body p-5 text-center">
-                            <h2 class="fw-bold">Sign up now</h2>
-                            <form action="/auth/register" method="POST">
-                                <!-- Full Name -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Full name" required />
-                                </div>
-
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="signupEmail" name="email" class="form-control" placeholder="Email address" required />
-                                </div>
-
-                                <!-- Password input -->
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="signupPassword" name="password" class="form-control" placeholder="Password" required />
-                                </div>
-
-                                <!-- Confirm Password input -->
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="signupPasswordConfirm" name="passwordConfirm" class="form-control" placeholder="Confirm Password" required />
-                                </div>
-
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4 profile-button">
-                                    Sign up
-                                </button>
-
-                                <!-- Login Button -->
-                                <p class="mb-2">Already have an account? <a href="../login/index.html">Log in</a></p>
-
-                                <!-- Social sign-up buttons -->
-                                <div class="text-center">
-                                    <p>or sign up with:</p>
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-google"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-twitter"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-github"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+    <section class="container-fluid">
+        <div class="row g-0 align-items-center">
+            <!-- Sign-Up Form Section -->
+            <div class="col-md-6 form-section">
+                <div class="text-center mb-5">
+                    <h2>Sign up now</h2>
+                </div>
+                <form id="signupForm">
+                    <div class="form-outline mb-4">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Full name" required />
                     </div>
+                    <div class="form-outline mb-4">
+                        <input type="email" id="signupEmail" name="email" class="form-control" placeholder="Email address" required />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="password" id="signupPassword" name="password" class="form-control" placeholder="Password" required />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="password" id="signupPasswordConfirm" name="passwordConfirm" class="form-control" placeholder="Confirm Password" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-4">Sign up</button>
+                    <div id="errorMessage" class="error-message"></div>
+                </form>
+                <div class="text-center link-section mt-4">
+                    <p>Already have an account? <a href="/login">Log in</a></p>
                 </div>
-
-                <!-- Image Section -->
-                <div class="col-lg-6 mb-5 mb-lg-0 signup-image">
-                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4" alt="Sign-up Image" />
-                </div>
+            </div>
+            
+            <!-- Image Section -->
+            <div class="col-md-6 image-section">
+                <img src="../assets/1707564292-itb-itb.jpg" alt="Sign-up Image" />
             </div>
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-
-    <!-- Optional JavaScript for form validation -->
     <script>
-        document.querySelector("form").addEventListener("submit", function(e) {
+        // JavaScript to handle form submission and show error messages without page reload
+        document.getElementById("signupForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
             const passwordConfirm = document.getElementById("signupPasswordConfirm").value;
+            const errorMessage = document.getElementById("errorMessage");
 
-            if (password !== passwordConfirm) {
-                e.preventDefault();
-                alert("Passwords do not match!");
+            try {
+                const response = await fetch("/auth/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name, email, password, passwordConfirm })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    window.location.href = "/login";
+                } else {
+                    errorMessage.textContent = result.error;
+                }
+            } catch (error) {
+                console.error("Error during registration:", error);
+                errorMessage.textContent = "An error occurred. Please try again.";
             }
         });
     </script>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
