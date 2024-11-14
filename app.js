@@ -70,6 +70,89 @@ app.get('/api/average-grade', isAuthenticated, (req, res) => {
     });
 });
 
+app.get('/api/quiz-scores', (req, res) => {
+    const userId = req.session.userId;
+
+    const query = 'SELECT quizscore FROM users WHERE id = ?';
+    db.query(query, [userId], (error, results) => {
+        if (error) {
+            return res.status(500).json({ success: false, error: 'Database error' });
+        }
+
+        // Check if the query returned any results
+        if (results.length === 0) {
+            return res.status(404).json({ success: false, error: 'User not found' });
+        }
+
+        // Check if quizscore is null and replace it with 0
+        const quizscore = results[0].quizscore !== null ? results[0].quizscore : 0;
+
+        // Send the quiz score back
+        res.json({ success: true, quizscore: quizscore });
+    });
+});
+
+
+app.post('/submit-quiz', (req, res) => {
+    const userId = req.body.userId;
+    const answers = req.body.answers;
+
+    // Logika untuk menghitung skor (contoh sederhana, tergantung pada logika penilaian kuis Anda)
+    const correctAnswers = {
+        question1: 'b', // All distinct elements from both sets
+        question2: 'a', // Increases or decreases at a constant rate
+        question3: 'b', // 0.5
+        question4: 'a', // x = 5
+        question5: 'a', // f'(x) = 2x
+        question6: 'a'  // 180 degrees
+    };    
+    let score = 0;
+    for (let question in correctAnswers) {
+        if (answers[question] === correctAnswers[question]) {
+            score += 1; // Penilaian sederhana; satu poin per jawaban benar
+        }
+    }
+
+    // Simpan skor ke database pada kolom `quizscore`
+    const updateQuery = 'UPDATE users SET quizscore = ? WHERE id = ?';
+    db.query(updateQuery, [score, userId], (error, results) => {
+        if (error) {
+            console.error('Error saving quiz score:', error);
+            return res.status(500).json({ success: false, error: 'Database error' });
+        }
+        res.json({ success: true, score });
+    });
+});
+
+// Tambahkan endpoint untuk menyimpan skor kuis
+app.post('/api/save-quiz-score', isAuthenticated, (req, res) => {
+    const userId = req.session.userId; // Asumsi userId ada dalam session
+    const { score } = req.body;
+
+    const query = 'UPDATE users SET quizscore = ? WHERE id = ?';
+    db.query(query, [score, userId], (error, results) => {
+        if (error) {
+            console.error('Error saving score:', error);
+            return res.status(500).json({ success: false, error: 'Database error' });
+        }
+        res.json({ success: true });
+    });
+});
+
+app.get('/api/get-previous-score', (req, res) => {
+    const userId = req.session.userId; // Pastikan userId disimpan di session
+
+    const query = 'SELECT quizscore FROM users WHERE id = ?'; // Ganti 'users' sesuai dengan nama tabel Anda
+    db.query(query, [userId], (error, results) => {
+        if (error) {
+            return res.status(500).json({ success: false, error: 'Database error' });
+        }
+
+        // Pastikan ada hasil
+        const previousScore = results[0] ? results[0].quizscore : null;
+        res.json({ success: true, previousScore });
+    });
+});
 
 
 // Middleware untuk memeriksa apakah user sudah login
@@ -141,7 +224,7 @@ app.get('/quiz/math', (req, res) => {
 });
 
 app.get('/quiz/programming', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/quiz/programming-quiz.html'));
+    res.sendFile(path.join(__dirname, 'frontend/comingsoon/index.html'));
 });
 
 // Endpoint untuk mendapatkan data user yang sedang login

@@ -78,6 +78,10 @@
             margin-right: 8px;
             vertical-align: middle;
         }
+        .confirmation-message strong {
+            color: #4caf50; /* Warna hijau untuk menyoroti skor */
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -120,6 +124,11 @@
 
     <div class="container quiz-container">
         <h2 class="text-center">Math Quiz</h2>
+
+        <!-- Container untuk Skor Percobaan Sebelumnya -->
+        <div id="previous-score" class="text-center" style="display: none; padding: 10px; background-color: #f0f8ff; border-radius: 8px; margin-bottom: 20px;">
+            Last Attempt Score: <strong><span id="score-value"></span>%</strong>
+        </div>
         <div id="quiz-questions">
 
             <!-- Question 1 -->
@@ -289,14 +298,100 @@
             }
         }
 
+        const correctAnswers = {
+            question1: 'b',
+            question2: 'a',
+            question3: 'b',
+            question4: 'a',
+            question5: 'a',
+            question6: 'a'
+            // Tambahkan jawaban benar lainnya sesuai dengan pertanyaan
+        };
+        
+        // Fungsi untuk menghitung skor persentase
+        function calculateScorePercentage(userAnswers) {
+            let correctCount = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+        
+            for (let question in correctAnswers) {
+                if (userAnswers[question] === correctAnswers[question]) {
+                    correctCount++;
+                }
+            }
+        
+            // Hitung persentase
+            const scorePercentage = (correctCount / totalQuestions) * 100;
+            return Math.round(scorePercentage); // Bulatkan ke bilangan bulat
+        }
+        
+        // Fungsi submit yang akan memproses jawaban pengguna
         function submitQuiz() {
+            // Ambil jawaban pengguna
+            const userAnswers = {
+                question1: document.querySelector('input[name="question1"]:checked')?.value,
+                question2: document.querySelector('input[name="question2"]:checked')?.value,
+                question3: document.querySelector('input[name="question3"]:checked')?.value,
+                question4: document.querySelector('input[name="question4"]:checked')?.value,
+                question5: document.querySelector('input[name="question5"]:checked')?.value,
+                question6: document.querySelector('input[name="question6"]:checked')?.value
+            };
+        
+            // Hitung skor persentase berdasarkan jawaban pengguna
+            const scorePercentage = calculateScorePercentage(userAnswers);
+        
+            // Tampilkan konfirmasi hasil dan skor
             confirmationMessage.style.display = 'block';
+            confirmationMessage.innerHTML = `
+                <h5>Quiz Submitted!</h5>
+                <p>Thank you for completing the Math Quiz. Your score is: <strong>${scorePercentage}%</strong></p>
+            `;
+        
+            // Sembunyikan pertanyaan dan navigasi
             document.getElementById('quiz-questions').style.display = 'none';
             document.querySelector('.quiz-nav').style.display = 'none';
             submitButton.style.display = 'none';
+        
+            // Kirim hasil ke server untuk disimpan di database
+            saveScoreToDatabase(scorePercentage);
+        }
+        
+        // Fungsi untuk mengirim skor ke database
+        function saveScoreToDatabase(scorePercentage) {
+            fetch('/api/save-quiz-score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ score: scorePercentage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Score saved successfully');
+                } else {
+                    console.error('Failed to save score:', data.error);
+                }
+            })
+            .catch(error => console.error('Error saving score:', error));
         }
 
+
         showQuestion(currentQuestion);
+
+        function fetchPreviousScore() {
+            fetch('/api/get-previous-score')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.previousScore !== null) {
+                        document.getElementById('previous-score').style.display = 'block';
+                        document.getElementById('score-value').textContent = data.previousScore;
+                    }
+                })
+                .catch(error => console.error('Error fetching previous score:', error));
+        }
+        
+        // Panggil fungsi ini saat halaman dimuat
+        fetchPreviousScore();
     </script>
     <script>
         // Mendapatkan nama pengguna dari sesi melalui endpoint
