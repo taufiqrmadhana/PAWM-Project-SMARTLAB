@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         body, html {
             height: 100%;
@@ -86,6 +87,57 @@
             font-weight: bold;
             font-size: 1.1rem;
         }
+        .progress-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            margin: auto;
+        }
+    
+        /* Rotating Border representing the completion percentage */
+        .rotating-border {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid transparent;
+            border-top: 8px solid #4caf50;
+            border-radius: 50%;
+            transform: rotate(0deg); /* Default rotation */
+        }
+    
+        /* Keyframe for rotation animation */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    
+        /* Main Circular Progress */
+        .circular-progress {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            background: conic-gradient(#4caf50 0% 0%, #e0e0e0 0% 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        .circular-progress span {
+            position: relative;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #4caf50;
+        }
+        
     </style>
 </head>
 <body>
@@ -124,7 +176,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>    
 
     <div class="container-fluid container-main">
         <div class="row">
@@ -182,42 +234,78 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Login History</h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Last login: 23 October 2024</li>
-                                    <li class="list-group-item">Previous login: 22 October 2024</li>
-                                    <li class="list-group-item">Previous login: 21 October 2024</li>
-                                </ul>
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Daily Learning Tips</h5>
+                            <div id="tipCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <p>"Learning is a journey, not a race. Take it one step at a time."</p>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <p>"Focus on understanding concepts, not just memorizing facts."</p>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <p>"Ask questions! Curiosity is the key to deeper understanding."</p>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <p>"Practice makes perfect. Review what you've learned regularly."</p>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <p>"Remember to take breaks and give your brain time to rest."</p>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#tipCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#tipCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Average Grade</h5>
-                                <p class="display-4 text-success">85</p>
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Materials Completed</h5>
+                                <div class="progress-container">
+                                    <!-- Rotating green ring -->
+                                    <div class="rotating-border"></div>
+                                    <!-- Circular Progress -->
+                                    <div class="progress-container">
+                                        <!-- Rotating border to represent percentage -->
+                                        <div class="rotating-border" id="rotatingBorder"></div>
+                                        <!-- Circular Progress Widget -->
+                                        <div class="circular-progress">
+                                            <span id="progressText">0%</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Pending Tasks</h5>
+                                <h5 class="card-title">Daily Routine Checklist</h5>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Data Structures
-                                        <span class="badge bg-primary rounded-pill">Due: 25 Oct</span>
+                                        <span><input type="checkbox" class="form-check-input me-2"> Review Today's Materials</span>
+                                        <i class="fas fa-check-circle text-muted" style="opacity: 0.5;" id="routineIcon1"></i>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Algorithms
-                                        <span class="badge bg-primary rounded-pill">Due: 26 Oct</span>
+                                        <span><input type="checkbox" class="form-check-input me-2"> Complete a Practice Quiz</span>
+                                        <i class="fas fa-check-circle text-muted" style="opacity: 0.5;" id="routineIcon2"></i>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Advanced Programming
-                                        <span class="badge bg-primary rounded-pill">Due: 27 Oct</span>
+                                        <span><input type="checkbox" class="form-check-input me-2"> Read a Learning Tip</span>
+                                        <i class="fas fa-check-circle text-muted" style="opacity: 0.5;" id="routineIcon3"></i>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><input type="checkbox" class="form-check-input me-2"> Update Progress Tracker</span>
+                                        <i class="fas fa-check-circle text-muted" style="opacity: 0.5;" id="routineIcon4"></i>
                                     </li>
                                 </ul>
                             </div>
@@ -232,9 +320,28 @@
         <p>&copy; 2024 ITB SMART-LAB. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Fetch average completion percentage from /api/average-grade
+        fetch('/api/average-grade')
+        .then(response => response.json())
+        .then(data => {
+            const completionPercentage = data.completionPercentage || 0; // Default to 0 if missing
+            const progressText = document.getElementById('progressText');
+            const rotatingBorder = document.getElementById('rotatingBorder');
+
+            // Update the percentage text
+            progressText.textContent = `${completionPercentage}%`;
+
+            // Rotate the border based on the completion percentage
+            rotatingBorder.style.transform = `rotate(${(completionPercentage / 100) * 360}deg)`;
+        })
+        .catch(error => console.error('Error fetching completion percentage:', error));
+
         function updateClock() {
             const clockElement = document.getElementById('clock');
             const now = new Date();
@@ -245,6 +352,31 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        const tips = [
+        "Learning is a journey, not a race. Take it one step at a time.",
+        "Focus on understanding concepts, not just memorizing facts.",
+        "Ask questions! Curiosity is the key to deeper understanding.",
+        "Practice makes perfect. Review what you've learned regularly.",
+        "Remember to take breaks and give your brain time to rest."
+        ];
+
+        function nextTip() {
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            document.getElementById('dailyTip').textContent = randomTip;
+        }
+        document.querySelectorAll('.form-check-input').forEach((checkbox, index) => {
+            checkbox.addEventListener('change', (event) => {
+                const icon = document.getElementById(`goalIcon${index + 1}`);
+                if (event.target.checked) {
+                    icon.style.opacity = 1;
+                    icon.classList.add('text-success');
+                } else {
+                    icon.style.opacity = 0.5;
+                    icon.classList.remove('text-success');
+                }
+            });
+        });
     </script>
     <script>
         // Mendapatkan nama pengguna dari sesi melalui endpoint

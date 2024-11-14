@@ -91,6 +91,53 @@
             margin-right: 8px;
             vertical-align: middle;
         }
+        .watched-toggle {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        .progress-widget {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .progress-bar {
+            height: 25px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #66bb6a);
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            line-height: 25px;
+            font-weight: bold;
+            transition: width 0.4s ease;
+        }
+        .section-divider {
+            border: none;
+            height: 2px;
+            background-color: #ccc;
+            margin: 30px 0;
+        }
+        .topic-section {
+            margin-top: 20px;
+            padding-bottom: 10px;
+        }
+        .section-heading {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -118,7 +165,7 @@
                         <a class="nav-link" href="/quiz">Quiz</a>
                     </li>
                     <li class="nav-item dropdown ms-3">
-                        <a class="nav-link dropdown-toggle profile-button" href="#" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle profile-button" href="/auth/logout" id="profileMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="Profile Image"> 
                             <span id="usernameDisplay">Paul Pogba</span>
                         </a>
@@ -132,10 +179,18 @@
     </nav>
 
     <div class="container-fluid container-main">
+        <<div class="progress-widget">
+            <p style="font-weight: bold; color: #333; font-size: 1.2rem;">Progress: <span id="progress-percentage">0%</span> completed</p>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" id="progress-bar-fill">0%</div>
+            </div>
+        </div>
+        <hr class="section-divider">
         <!-- Mathematics Section -->
         <h2 class="section-heading">Mathematics Topics</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
-            <div class="col">
+            <!-- Video Card 1 -->
+            <div class="col" id="videoCard_1">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Sets and Operations</h5>
@@ -143,10 +198,12 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/xZELQc11ACY" title="Sets and Operations" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(1)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <!-- Video Card 2 -->
+            <div class="col" id="videoCard_2">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Graphs and Functions</h5>
@@ -154,10 +211,12 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/kvU9sOzT2mk" title="Graphs and Functions" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(2)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <!-- Video Card 3 -->
+            <div class="col" id="videoCard_3">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Probability Basics</h5>
@@ -165,10 +224,12 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/SkidyDQuupA" title="Probability Basics" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(3)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <!-- Video Card 4 -->
+            <div class="col" id="videoCard_4">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Algebra Basics</h5>
@@ -176,10 +237,12 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/Z-ZkmpQBIFo" title="Algebra Basics" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(4)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <!-- Video Card 5 -->
+            <div class="col" id="videoCard_5">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Calculus Essentials</h5>
@@ -187,10 +250,12 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/WsQQvHm4lSw" title="Calculus Essentials" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(5)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <!-- Video Card 6 -->
+            <div class="col" id="videoCard_6">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Geometry Essentials</h5>
@@ -198,15 +263,18 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/302eJ3TzJQU" title="Geometry Essentials" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(6)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <hr class="section-divider">
+    
         <!-- Programming Section -->
         <h2 class="section-heading mt-5">Programming Topics</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
-            <div class="col">
+            <div class="col" id="videoCard_7">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Binary Search</h5>
@@ -214,10 +282,11 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/MFhxShGxHWc" title="Binary Search" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(7)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="videoCard_8">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Sorting Algorithms</h5>
@@ -225,10 +294,11 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/rbbTd-gkajw" title="Sorting Algorithms" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(8)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="videoCard_9">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Data Structures</h5>
@@ -236,10 +306,11 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/SFEROgwxicA" title="Data Structures" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(9)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="videoCard_10">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Functions in Python</h5>
@@ -247,10 +318,11 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/89cGQjB5R4M" title="Functions in Python" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(10)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="videoCard_11">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Error Handling</h5>
@@ -258,21 +330,27 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/j_q6NGOwDJo" title="Error Handling" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(11)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="videoCard_12">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Loops and Control Statements</h5>
                         <p class="card-text">Explore loops and conditionals to control the flow of your programs.</p>
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Loops and Control Statements" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/Jg2GxT0PK9o?si=HLyHoMaSS6Jvqefe" title="Loops and Control Statements" allowfullscreen></iframe>
                         </div>
+                        <button class="btn watched-toggle btn-secondary" onclick="toggleWatched(12)">Mark as Watched</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+        <hr class="section-divider">
+        <!-- Video Cards go here -->
+
     </div>
 
     <footer>
@@ -282,7 +360,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script>
-        // Mendapatkan nama pengguna dari sesi melalui endpoint
+        const totalVideos = 12; // Update this if the total video count changes
+        let watchedVideos = 0;
+    
+        // Load user data (e.g., username) on page load
         fetch('/auth/user')
             .then(response => response.json())
             .then(data => {
@@ -290,9 +371,70 @@
                     document.getElementById('usernameDisplay').textContent = data.username;
                 }
             })
-            .catch(error => {
-                console.error("Error fetching user data:", error);
-            });
+            .catch(error => console.error("Error fetching user data:", error));
+    
+        // Load watched statuses on page load
+        function loadWatchedStatuses() {
+            fetch('/materials/progress')
+                .then(response => response.json())
+                .then(data => {
+                    const watchedVideoIds = data.watchedVideos || [];
+                    watchedVideos = watchedVideoIds.length; // Set watched video count
+                    watchedVideoIds.forEach(videoId => {
+                        const button = document.querySelector(`#videoCard_${videoId} .watched-toggle`);
+                        if (button) {
+                            button.textContent = 'Watched';
+                            button.classList.remove('btn-secondary');
+                            button.classList.add('btn-success');
+                        }
+                    });
+                    updateProgress(); // Update progress bar after setting watched statuses
+                })
+                .catch(error => console.error('Error loading watched statuses:', error));
+        }
+    
+        // Update the progress bar based on watched videos count
+        function updateProgress() {
+            const percentage = Math.round((watchedVideos / totalVideos) * 100);
+            document.getElementById('progress-percentage').textContent = `${percentage}%`;
+            document.getElementById('progress-bar-fill').style.width = `${percentage}%`;
+            document.getElementById('progress-bar-fill').textContent = `${percentage}%`;
+        }
+    
+        // Toggle watched status and update the backend
+        function toggleWatched(videoId) {
+            const button = document.querySelector(`#videoCard_${videoId} .watched-toggle`);
+            const isWatched = button.classList.contains('btn-success');
+    
+            // Update UI instantly
+            if (isWatched) {
+                button.textContent = 'Mark as Watched';
+                button.classList.remove('btn-success');
+                button.classList.add('btn-secondary');
+                watchedVideos--;
+            } else {
+                button.textContent = 'Watched';
+                button.classList.remove('btn-secondary');
+                button.classList.add('btn-success');
+                watchedVideos++;
+            }
+    
+            updateProgress(); // Update progress bar
+    
+            // Send watched status to the backend
+            fetch(`/materials/progress/${videoId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ watched: !isWatched })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Progress updated:', data))
+            .catch(error => console.error('Error updating progress:', error));
+        }
+    
+        // Load watched statuses when the page is loaded
+        document.addEventListener('DOMContentLoaded', loadWatchedStatuses);
     </script>
+    
 </body>
 </html>

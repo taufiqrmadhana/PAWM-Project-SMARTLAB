@@ -20,6 +20,58 @@ app.use(session({
 
 console.log("Middleware setup complete");
 
+const Progress = require('./models/Progress');
+
+// Get user's progress
+app.get('/materials/progress', isAuthenticated, (req, res) => {
+    const userId = req.session.userId;
+    Progress.getProgressByUserId(userId, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to retrieve progress' });
+        }
+        const watchedVideoIds = results.filter(row => row.watched).map(row => row.video_id);
+        res.json({ watchedVideos: watchedVideoIds });
+    });
+});
+
+
+// Update user's progress for a specific video
+app.post('/materials/progress/:videoId', isAuthenticated, (req, res) => {
+    const userId = req.session.userId;
+    const videoId = req.params.videoId;
+    const watched = req.body.watched;
+
+    Progress.setProgress(userId, videoId, watched, (err, result) => {
+        if (err) {
+            console.error('Failed to update progress:', err);
+            return res.status(500).json({ error: 'Failed to update progress' });
+        }
+        res.json({ success: true });
+    });
+});
+
+
+// In your server.js or a relevant route file
+// Calculate completion percentage based on watched videos
+app.get('/api/average-grade', isAuthenticated, (req, res) => {
+    const userId = req.session.userId; 
+
+    // Use the same progress fetching logic from /materials/progress
+    Progress.getProgressByUserId(userId, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to retrieve progress' });
+        }
+        // Calculate completion based on watched videos count
+        const watchedVideos = results.filter(row => row.watched).length;
+        const totalVideos = 12; // Avoid division by zero
+        const completionPercentage = Math.round((watchedVideos / totalVideos) * 100);
+
+        res.json({ completionPercentage });
+    });
+});
+
+
+
 // Middleware untuk memeriksa apakah user sudah login
 function isAuthenticated(req, res, next) {
     if (req.session.username) {
@@ -67,7 +119,7 @@ app.get('/interactive', (req, res) => {
 });
 
 app.get('/interactive/math', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/interactive/mathvisualization.html'));
+    res.sendFile(path.join(__dirname, 'frontend/interactive/math-visualization.html'));
 });
 
 app.get('/interactive/programming', (req, res) => {
