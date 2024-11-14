@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const session = require('express-session');
 const path = require('path');
 const bcrypt = require('bcryptjs');
