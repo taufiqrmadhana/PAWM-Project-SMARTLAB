@@ -33,6 +33,12 @@ redisClient.on('error', (err) => {
     console.error('Redis error:', err);
 });
 
+redisClient.connect().then(() => {
+    console.log('Redis connection established');
+}).catch(err => {
+    console.error('Error connecting to Redis:', err);
+});
+
 // Connect to Redis and handle commands
 async function setupRedis() {
     try {
@@ -56,24 +62,20 @@ async function setupRedis() {
 // Call the setup function to connect Redis and test it
 setupRedis();
 
-// Using Node.js to generate a random secret key
-import crypto from 'crypto';
-const secretKey = crypto.randomBytes(64).toString('hex');
-console.log(secretKey);
+
 
 // Set up session store with Redis
+
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
-    secret: secretKey,
+    secret: process.env.SESSION_SECRET, // Load the secret from an environment variable
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // Only use https in production
-        httpOnly: true,
-        sameSite: 'strict', 
-        maxAge: 24 * 60 * 60 * 1000,  // 1 day session duration
+        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+        maxAge: 3600000
     }
 }));
+
 
 // Middleware to parse body of POST requests
 app.use(express.urlencoded({ extended: true }));
