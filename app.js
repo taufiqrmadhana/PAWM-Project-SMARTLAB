@@ -1,14 +1,15 @@
 import express from 'express';
 import session from 'express-session';
 import { createClient } from 'redis';
-import path from 'path'; 
-import bcrypt from 'bcryptjs'; 
+import path from 'path';
+import bcrypt from 'bcryptjs';
 import db from './db.js'; 
 import authController from './controllers/authController.js'; 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import RedisStore from 'connect-redis';
 import dotenv from 'dotenv';
+import crypto from 'crypto';
 
 // Load environment variables
 dotenv.config();
@@ -31,12 +32,6 @@ redisClient.on('connect', () => {
 
 redisClient.on('error', (err) => {
     console.error('Redis error:', err);
-});
-
-redisClient.connect().then(() => {
-    console.log('Redis connection established');
-}).catch(err => {
-    console.error('Error connecting to Redis:', err);
 });
 
 // Connect to Redis and handle commands
@@ -62,20 +57,22 @@ async function setupRedis() {
 // Call the setup function to connect Redis and test it
 setupRedis();
 
-
+// Generate a random secret key for session encryption
+const secretKey = crypto.randomBytes(64).toString('hex');
 
 // Set up session store with Redis
-
 app.use(session({
-    secret: process.env.SESSION_SECRET, // Load the secret from an environment variable
+    store: new RedisStore({ client: redisClient }),
+    secret: secretKey,  // Use the generated secret key for session encryption
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        maxAge: 3600000
+        secure: process.env.NODE_ENV === 'production', // Only true when in production environment (HTTPS)
+        httpOnly: true,
+        sameSite: 'strict', 
+        maxAge: 24 * 60 * 60 * 1000,  // 1 day session duration
     }
 }));
-
 
 // Middleware to parse body of POST requests
 app.use(express.urlencoded({ extended: true }));
@@ -256,4 +253,4 @@ app.listen(3000, () => {
     console.log("Server started on http://localhost:3000");
 });
 
-export default app; 
+export default app; // Export the app for testing
