@@ -63,15 +63,15 @@ const secretKey = crypto.randomBytes(64).toString('hex');
 // Set up session store with Redis
 app.use(session({
     store: new RedisStore({ client: redisClient }),
-    secret: secretKey,  // Use the generated secret key for session encryption
+    secret: secretKey,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // Only true when in production environment (HTTPS)
+        secure: process.env.NODE_ENV === false,
         httpOnly: true,
-        sameSite: 'strict', 
-        maxAge: 24 * 60 * 60 * 1000,  // 1 day session duration
-    }
+        sameSite: 'strict',
+        maxAge: 24 * 60 * 60 * 1000,
+    },
 }));
 
 // Middleware to parse body of POST requests
