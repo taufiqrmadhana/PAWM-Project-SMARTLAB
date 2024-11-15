@@ -1,0 +1,24 @@
+# .gitignore
+
+# Node.js dependencies
+/node_modules/
+
+# .env file to avoid pushing sensitive information
+.env
+
+# Logs
+logs
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor settings
+.vscode/
+.idea/
+
+# Others
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
