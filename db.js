@@ -23,4 +23,5 @@ pool.getConnection((err, connection) => {
     connection.release();  // Always release the connection back to the pool
 });
 
-export default pool; // Export the pool to be used in other modules
+// Export the pool to be used in other modules
+export default pool;

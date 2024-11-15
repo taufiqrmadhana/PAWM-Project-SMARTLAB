@@ -5,13 +5,15 @@ import db from '../db.js'; // Import db using ES module syntax
 const register = (req, res) => {
     const { name, email, password, passwordConfirm } = req.body;
 
+    // Ensure passwords match
     if (password !== passwordConfirm) {
         return res.status(400).json({ error: "Passwords do not match!" });
     }
 
+    // Check if the email already exists in the database
     db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
         if (error) {
-            console.error(error);
+            console.error('Database error during email check:', error);
             return res.status(500).json({ error: "An error occurred. Please try again later." });
         }
 
@@ -20,16 +22,19 @@ const register = (req, res) => {
         }
 
         try {
+            // Hash the password
             const hashedPassword = await bcrypt.hash(password, 8);
+            
+            // Insert the new user into the database
             db.query('INSERT INTO users SET ?', { name, email, password: hashedPassword }, (err) => {
                 if (err) {
-                    console.error(err);
+                    console.error('Database error during user insert:', err);
                     return res.status(500).json({ error: "Error saving user. Please try again later." });
                 }
                 res.status(200).json({ success: true });
             });
         } catch (hashError) {
-            console.error(hashError);
+            console.error('Error encrypting the password:', hashError);
             return res.status(500).json({ error: "Error encrypting the password." });
         }
     });
@@ -39,9 +44,10 @@ const register = (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body;
 
+    // Query to check if the user exists
     db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
         if (error) {
-            console.error(error);
+            console.error('Database error during login:', error);
             return res.status(500).json({ error: "An error occurred. Please try again later." });
         }
 
@@ -51,7 +57,7 @@ const login = async (req, res) => {
 
         const user = results[0];
 
-        // Verify password
+        // Verify the password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ error: "Invalid email or password." });
