@@ -1,9 +1,8 @@
-// backend/controllers/authController.js
-const bcrypt = require('bcryptjs');
-const db = require('../db'); // Pastikan db.js terhubung ke database
+import bcrypt from 'bcryptjs';
+import db from '../db.js'; // Import db using ES module syntax
 
-// Register user baru
-exports.register = (req, res) => {
+// Register user
+const register = (req, res) => {
     const { name, email, password, passwordConfirm } = req.body;
 
     if (password !== passwordConfirm) {
@@ -37,7 +36,7 @@ exports.register = (req, res) => {
 };
 
 // Login user
-exports.login = async (req, res) => {
+const login = async (req, res) => {
     const { email, password } = req.body;
 
     db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
@@ -52,16 +51,19 @@ exports.login = async (req, res) => {
 
         const user = results[0];
 
-        // Verifikasi password
+        // Verify password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ error: "Invalid email or password." });
         }
 
-        // Set session jika login berhasil
+        // Set session if login is successful
         req.session.username = user.name;
         req.session.userId = user.id;
 
         res.status(200).json({ message: "Login successful" });
     });
 };
+
+// Exporting the functions as named exports
+export default { register, login };

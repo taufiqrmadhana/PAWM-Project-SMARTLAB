@@ -1,4 +1,4 @@
-const db = require('../db');
+import db from '../db.js'; // db.js exports pool as default
 
 const Progress = {
     getProgressByUserId: (userId, callback) => {
@@ -22,4 +22,5 @@ const Progress = {
     }
 };
 
-module.exports = Progress;
+// Export the Progress object using ES module export
+export default Progress;

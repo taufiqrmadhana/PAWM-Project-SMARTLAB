@@ -1,9 +1,15 @@
 import express from 'express';
-const session = require('express-session');
-const path = require('path');
-const bcrypt = require('bcryptjs');
-const db = require('./db');
-const authController = require('./controllers/authController');
+import session from 'express-session';
+import path from 'path'; // Use import for path module (built-in)
+import bcrypt from 'bcryptjs'; // Use import for bcryptjs
+import db from './db.js'; // Import db.js using ES module syntax
+import authController from './controllers/authController.js'; // Import authController using ES module syntax
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Create __dirname equivalent for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express(); // Inisialisasi `app`
 
@@ -20,7 +26,7 @@ app.use(session({
 
 console.log("Middleware setup complete");
 
-const Progress = require('./models/Progress');
+import Progress from './models/Progress.js'; // Add `.js` extension
 
 // Get user's progress
 app.get('/materials/progress', isAuthenticated, (req, res) => {
@@ -33,7 +39,6 @@ app.get('/materials/progress', isAuthenticated, (req, res) => {
         res.json({ watchedVideos: watchedVideoIds });
     });
 });
-
 
 // Update user's progress for a specific video
 app.post('/materials/progress/:videoId', isAuthenticated, (req, res) => {
@@ -49,7 +54,6 @@ app.post('/materials/progress/:videoId', isAuthenticated, (req, res) => {
         res.json({ success: true });
     });
 });
-
 
 // In your server.js or a relevant route file
 // Calculate completion percentage based on watched videos
@@ -91,7 +95,6 @@ app.get('/api/quiz-scores', (req, res) => {
         res.json({ success: true, quizscore: quizscore });
     });
 });
-
 
 app.post('/submit-quiz', (req, res) => {
     const userId = req.body.userId;
@@ -153,7 +156,6 @@ app.get('/api/get-previous-score', (req, res) => {
         res.json({ success: true, previousScore });
     });
 });
-
 
 // Middleware untuk memeriksa apakah user sudah login
 function isAuthenticated(req, res, next) {
@@ -254,4 +256,4 @@ app.listen(3000, () => {
     console.log("Server started on http://localhost:3000");
 });
 
-module.exports = app; 
+export default app; // Export the app for testing

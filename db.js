@@ -1,5 +1,5 @@
-const mysql = require('mysql');
-const dotenv = require('dotenv');
+import mysql from 'mysql2'; // Importing mysql2 using ES Module syntax
+import dotenv from 'dotenv'; // Importing dotenv using ES Module syntax
 
 // Load environment variables from .env file
 dotenv.config();
@@ -23,4 +23,4 @@ pool.getConnection((err, connection) => {
     connection.release();  // Always release the connection back to the pool
 });
 
-module.exports = pool; // Export the pool for reuse in other parts of your app
+export default pool; // Export the pool to be used in other modules
