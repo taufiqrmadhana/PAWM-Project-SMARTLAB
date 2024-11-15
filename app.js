@@ -64,10 +64,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // Only use https in production
+        secure: process.env.NODE_ENV === 'production', // Hanya di https saat produksi
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000,  // 1 day session duration
-    },
+        sameSite: 'strict', // Pastikan sama situs
+        maxAge: 24 * 60 * 60 * 1000,  // 1 hari
+    }
 }));
 
 // Middleware to parse body of POST requests
@@ -92,6 +93,7 @@ function isAuthenticated(req, res, next) {
 }
 
 // Example route to get user's progress
+import Progress from './models/Progress.js'; // Add `.js` extension
 app.get('/materials/progress', isAuthenticated, (req, res) => {
     const userId = req.session.userId;
     Progress.getProgressByUserId(userId, (err, results) => {
@@ -196,7 +198,40 @@ app.get('/interactive', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend/interactive/index.html'));
 });
 
-// More routes for other parts of the application
+app.get('/interactive/math', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/interactive/math-visualization.html'));
+});
+
+app.get('/interactive/programming', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/interactive/programming-lab.html'));
+});
+
+// Route untuk halaman Materials
+app.get('/materials', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/materials/index.html'));
+});
+
+// Route untuk halaman Quiz
+app.get('/quiz', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/quiz/index.html'));
+});
+
+app.get('/quiz/math', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/quiz/math-quiz.html'));
+});
+
+app.get('/quiz/programming', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/comingsoon/index.html'));
+});
+
+// Endpoint untuk mendapatkan data user yang sedang login
+app.get('/auth/user', (req, res) => {
+    if (req.session.username) {
+        res.json({ username: req.session.username });
+    } else {
+        res.status(401).json({ error: 'Not authenticated' });
+    }
+});
 
 // Logout route
 app.get('/auth/logout', (req, res) => {
