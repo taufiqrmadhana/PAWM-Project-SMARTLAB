@@ -29,9 +29,8 @@ redisClient.on('connect', () => {
     console.log('Connected to Redis!');
 });
 
-// Event listener for Redis errors
 redisClient.on('error', (err) => {
-    console.log('Redis error: ', err);
+    console.error('Redis error:', err);
 });
 
 // Connect to Redis and handle commands
@@ -57,17 +56,22 @@ async function setupRedis() {
 // Call the setup function to connect Redis and test it
 setupRedis();
 
+// Using Node.js to generate a random secret key
+import crypto from 'crypto';
+const secretKey = crypto.randomBytes(64).toString('hex');
+console.log(secretKey);
+
 // Set up session store with Redis
 app.use(session({
     store: new RedisStore({ client: redisClient }),
-    secret: 'your-secret-key',
+    secret: secretKey,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // Hanya di https saat produksi
+        secure: process.env.NODE_ENV === 'production', // Only use https in production
         httpOnly: true,
-        sameSite: 'strict', // Pastikan sama situs
-        maxAge: 24 * 60 * 60 * 1000,  // 1 hari
+        sameSite: 'strict', 
+        maxAge: 24 * 60 * 60 * 1000,  // 1 day session duration
     }
 }));
 
